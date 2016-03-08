@@ -1,26 +1,28 @@
-var alphabet = "abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ123456789";
+var alphabet =  "abcdefghijklmnopqrstuvwxyz" +
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ" +
+                "0123456789";
 var maxLength = alphabet.length;
 
-function encodeToBase57(indexNum){
-    var encodedString = "";
-    while (indexNum){
-        var remainder = indexNum % maxLength;
-        indexNum = Math.floor(indexNum / maxLength);
-        encodedString = alphabet[remainder].toString() + encodedString;
+function encode(dbId){
+    var encodedId = "";
+    while (dbId){
+        var remainder = dbId % maxLength;
+        dbId = Math.floor(dbId / maxLength);
+        encodedId = alphabet[remainder].toString() + encodedId;
     }
-    return encodedString;
+    return encodedId;
 }
 
-function decodeFromBase57(urlString){
-    var decoded = 0;
-    while (urlString){
-        var index = alphabet.indexOf(urlString[0]);
-        var power = urlString.length - 1;
-        decoded += index * (Math.pow(maxLength, power));
-        urlString = urlString.substring(1);
+function decode(urlId){
+    var decodedId = 0;
+    while (urlId){
+        var index = alphabet.indexOf(urlId[0]);
+        var power = urlId.length - 1;
+        decodedId += index * (Math.pow(maxLength, power));
+        urlId = urlId.substring(1);
     }
-    return decoded;
+    return decodedId;
 }
 
-module.exports.encodeToBase57 = encodeToBase57;
-module.exports.decodeFromBase57 = decodeFromBase57;
+module.exports.encode = encode;
+module.exports.decode = decode;
