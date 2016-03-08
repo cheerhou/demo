@@ -28,9 +28,13 @@ if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 mongoose.connect('mongodb://' + connectionString);
 
 
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
 
+app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/', function(req, res){
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
 
 app.post('/api/generate', function (req, res) {
     var longUrl = req.body.url;
@@ -66,14 +70,21 @@ app.post('/api/generate', function (req, res) {
 app.get('/:urlStr', function (req, res) {
     var urlStr = req.params.urlStr;
     var id = converter.decodeFromBase57(urlStr);
+    console.log("decodeFromBase57 id:" + urlStr + " : " + id);
 
     // check if url already exists in database
     Data.findOne({_id: id}, function (err, result) {
-        if (result) {
+        if (err) {
+            console.log(err);
+            //res.redirect(result.long_url);
+        }
+        if(result) {
+            console.log("decodeFromBase57 result" + result);
             res.redirect(result.long_url);
         } else {
             res.redirect(hostAddress);
         }
+
     });
 
 });

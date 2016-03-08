@@ -22,7 +22,7 @@ $('button').on('click', function(){
         url: '/api/generate',
         type: 'POST',
         dataType: 'JSON',
-        data: {url: $('#url-field').val()},
+        data: {url: $('#longUrl').val()},
         success: function(data){
             var resultHTML = '<a class="result" href="' + data.shortUrl + '">'
                 + data.shortUrl + '</a>';
