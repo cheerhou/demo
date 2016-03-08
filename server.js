@@ -32,13 +32,13 @@ if (process.env.OPENSHIFT_MONGODB_DB_PASSWORD) {
 mongoose.connect('mongodb://' + connectionString);
 
 
-//app.use(express.static(__dirname + '/public'));
+app.use(express.static(__dirname + '/public'));
 
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function(req, res){
-    res.sendFile(path.join(__dirname, 'index.html'));
-});
+//app.get('/', function(req, res){
+//    res.sendFile(path.join(__dirname, 'index.html'));
+//});
 
 app.post('/api/generate', function (req, res) {
     var longUrl = req.body.url;
