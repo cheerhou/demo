@@ -5,10 +5,14 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
-var port = process.env.OPENSHIFT_NODEJS_PORT || 3000;
+var port = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000;
+var http = require('http');
+app.set('port',port);
+app.set('ip', ipaddress);
+
 var hostAddress = 'http://' + ipaddress + ':' + port + '/';
 var path = require('path');
-var connectionString = '127.0.0.1:27017/liaoyuan';
+var connectionString = '127.0.0.1:27017/demo';
 
 var converter = require('./convert.js');
 var Data = require('./mongodb.js');
@@ -89,4 +93,8 @@ app.get('/:urlStr', function (req, res) {
 
 });
 
-app.listen(port, ipaddress);
+http.createServer(app).listen(app.get('port') ,app.get('ip'), function () {
+    console.log("✔Express server listening at %s:%d ", app.get('ip'),app.get('port'));
+    //server();
+});
+//app.listen(port, ipaddress);
