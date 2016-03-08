@@ -9,8 +9,8 @@
     "openshift"
   ],
   "author": {
-    "name": "OpenShift",
-    "email": "ramr@example.org",
+    "name": "Chenjin Hou",
+    "email": "cheerhou@gmail.com",
     "url": "http://www.openshift.com/"
   },
   "homepage": "http://www.openshift.com/",
@@ -25,7 +25,10 @@
   },
 
   "dependencies": {
-    "express": "~3.4.4"
+    "express": "~3.4.4",
+    "mongoose": "4.2.9",
+    "body-parser": "^1.14.1"
+
   },
   "devDependencies": {},
   "bundleDependencies": [],
