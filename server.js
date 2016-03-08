@@ -1,14 +1,14 @@
-var express = require('express');
+var express = require("express");
 var app = express();
 
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var ipaddress = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1';
 var port = process.env.OPENSHIFT_NODEJS_PORT || process.env.PORT || 3000;
-var http = require('http');
-app.set('port',port);
-app.set('ip', ipaddress);
+//var http = require("http");
+//app.set('port',port);
+//app.set('ip', ipaddress);
 
 var hostAddress = 'http://' + ipaddress + ':' + port + '/';
 var path = require('path');
@@ -93,8 +93,8 @@ app.get('/:urlStr', function (req, res) {
 
 });
 
-http.createServer(app).listen(app.get('port') ,app.get('ip'), function () {
-    console.log("✔Express server listening at %s:%d ", app.get('ip'),app.get('port'));
-    //server();
-});
-//app.listen(port, ipaddress);
+//http.createServer(app).listen(app.get('port') ,app.get('ip'), function () {
+//    console.log("✔Express server listening at %s:%d ", app.get('ip'),app.get('port'));
+//    //server();
+//});
+app.listen(port, ipaddress);
